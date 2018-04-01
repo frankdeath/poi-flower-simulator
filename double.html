@@ -82,11 +82,66 @@
         </canvas>
     </div>
 
+    <!--script type="text/javascript" src="double.js"></script-->
+
+    <form name="flowerModes" action="" method="GET">
+    Left
+    <select name="lHandDir" onchange="lHandDir(this.value)">
+      <option value="0">CW</option>
+      <option value="1">CCW</option>
+    </select>
+    <select name="lPoiDir" onchange="lPoiDir(this.value)">
+      <option value="0">In-spin</option>
+      <option value="1">Anti-spin</option>
+    </select>
+    <select name="lMode" onchange="lMode(this.value)">
+      <option value="-1">Non-integer</option>
+      <option value="0">Extension</option>
+      <option value="1">1 petal</option>
+      <option value="2">2 petal</option>
+      <option value="3">3 petal</option>
+      <option value="4">4 petal</option>
+      <option value="5">5 petal</option>
+      <option value="6">6 petal</option>
+    </select>
+    <select name="plane" onchange="plane(this.value)">
+      <option value="0">Wheel</option>
+      <option value="1">Wall</option>
+    </select>
+    <select name="rHandDir" onchange="rHandDir(this.value)">
+      <option value="0">CW</option>
+      <option value="1">CCW</option>
+    </select>
+    <select name="rPoiDir" onchange="rPoiDir(this.value)">
+      <option value="0">In-spin</option>
+      <option value="1">Anti-spin</option>
+    </select>
+    <select name="rMode" onchange="rMode(this.value)">
+      <option value="-1">Non-integer</option>
+      <option value="0">Extension</option>
+      <option value="1">1 petal</option>
+      <option value="2">2 petal</option>
+      <option value="3">3 petal</option>
+      <option value="4">4 petal</option>
+      <option value="5">5 petal</option>
+      <option value="6">6 petal</option>
+    </select>
+    Right
+    </form>
+    
+    <!--div>
+        <canvas id="canvas" width="600" height="600">
+         This text is displayed if your browser 
+         does not support HTML5 Canvas.
+        </canvas>
+    </div-->
+
     <script type="text/javascript" src="double.js"></script>
 
+    <br><br>
     <a href="http://flattr.com/thing/739382/Flower-simulator" target="_blank">
     <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
-	<br>
+    <br>
   </center>
   </section>
 </body>

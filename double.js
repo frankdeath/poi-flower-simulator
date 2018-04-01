@@ -26,6 +26,13 @@ var lPause = 0;
 var rPause = 0;
 var lColor = 0;
 var rColor = 4;
+var lHandDir;
+var lPoiDir;
+var lMode;
+var plane;
+var rHandDir;
+var rPoiDir;
+var rMode;
 
 function circle(x,y,r) {
   ctx.beginPath();
@@ -164,8 +171,230 @@ function init() {
   document.flowerArgs.rTailLen.value = rTailLen.toString();
   document.flowerArgs.updateInterval.value = updateInterval.toString();
   document.flowerArgs.shoulderSpacing.value = shoulderSpacing.toString();
-  //
+  // Initialize mode menus
+  lHandDir = document.flowerModes.lHandDir;
+  lPoiDir = document.flowerModes.lPoiDir;
+  lMode = document.flowerModes.lMode;
+  plane = document.flowerModes.plane;
+  rHandDir = document.flowerModes.rHandDir;
+  rPoiDir = document.flowerModes.rPoiDir;
+  rMode = document.flowerModes.rMode;
+  syncModeMenus();
   return setInterval(draw, updateInterval);
+}
+
+function syncModeMenus() {
+  if (lArmSpd > 0)
+  {
+    lHandDir.value = "1";
+  }
+  else
+  {
+    lHandDir.value = "0";
+  }
+
+  if (lArmSpd * lPoiSpd > 0)
+  {
+    lPoiDir.value = "0";
+  }
+  else
+  {
+    lPoiDir.value = "1";
+  }
+
+  if (lPoiDir.value == "0")
+  {
+    // inspin
+    switch(lPoiSpd / lArmSpd)
+    {
+      case 1:
+        // extension
+	lMode.value = "0";
+        break;
+	
+      case 2:
+        // 1-petal
+	lMode.value = "1";
+        break;
+
+      case 3:
+        // 2-petal
+	lMode.value = "2";
+        break;
+
+      case 4:
+        // 3-petal
+	lMode.value = "3";
+        break;
+	
+      case 5:
+        // 4-petal
+	lMode.value = "4";
+        break;
+
+      case 6:
+        // 5-petal
+	lMode.value = "5";
+        break;
+	
+      case 7:
+        // 6-petal
+	lMode.value = "6";
+        break;
+	
+      default:
+        // Unknown
+	lMode.value = "-1";
+        break;
+    }
+  }
+  else
+  {
+    // antispin
+    switch(lPoiSpd / lArmSpd)
+    {
+      case -1:
+        // 1-petal
+	lMode.value = "1";
+        break;
+
+      case -2:
+        // 3-petal
+	lMode.value = "3";
+        break;
+	
+      case -3:
+        // 4-petal
+	lMode.value = "4";
+        break;
+
+      case -4:
+        // 5-petal
+	lMode.value = "5";
+        break;
+	
+      case -5:
+        // 6-petal
+	lMode.value = "6";
+        break;
+	
+      default:
+        // Unknown
+	lMode.value = "-1";
+        break;
+     }
+  }
+  
+  if (rArmSpd > 0)
+  {
+    rHandDir.value = "1";
+  }
+  else
+  {
+    rHandDir.value = "0";
+  }
+  
+  if (rArmSpd * rPoiSpd > 0)
+  {
+    rPoiDir.value = "0";
+  }
+  else
+  {
+    rPoiDir.value = "1";
+  }
+
+  if (rPoiDir.value == "0")
+  {
+    // inspin
+    switch(rPoiSpd / rArmSpd)
+    {
+      case 1:
+        // extension
+	rMode.value = "0";
+        break;
+	
+      case 2:
+        // 1-petal
+	rMode.value = "1";
+        break;
+
+      case 3:
+        // 2-petal
+	rMode.value = "2";
+        break;
+
+      case 4:
+        // 3-petal
+	rMode.value = "3";
+        break;
+	
+      case 5:
+        // 4-petal
+	rMode.value = "4";
+        break;
+
+      case 6:
+        // 5-petal
+	rMode.value = "5";
+        break;
+	
+      case 7:
+        // 6-petal
+	rMode.value = "6";
+        break;
+	
+      default:
+        // Unknown
+	rMode.value = "-1";
+        break;
+    }
+  }
+  else
+  {
+    // antispin
+    switch(rPoiSpd / rArmSpd)
+    {
+      case -1:
+        // 1-petal
+	rMode.value = "1";
+        break;
+
+      case -2:
+        // 3-petal
+	rMode.value = "3";
+        break;
+	
+      case -3:
+        // 4-petal
+	rMode.value = "4";
+        break;
+
+      case -4:
+        // 5-petal
+	rMode.value = "5";
+        break;
+	
+      case -5:
+        // 6-petal
+	rMode.value = "6";
+        break;
+	
+      default:
+        // Unknown
+	rMode.value = "-1";
+        break;
+     }
+  }
+  
+  if (shoulderSpacing != 0)
+  {
+    plane.value = "1";
+  }
+  else
+  {
+    plane.value = "0";
+  }
+  
 }
 
 function pauseLeft(form) {
@@ -215,6 +444,7 @@ function updateValues(form) {
   rTailLen = parseInt(form.rTailLen.value);
   updateInterval = parseInt(form.updateInterval.value);
   //shoulderSpacing = form.shoulderSpacing.value;
+  syncModeMenus();
 }
 
 function restart(form) {
