@@ -1,2 +1,2 @@
 # poi-flower-simulator
-Public
+written in javascript

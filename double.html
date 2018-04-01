@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flower Simulator</title>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
+  </head>
+<body>
+  <center>
+  <section>
+    <form name="flowerArgs" action="" method="GET">
+    Left Arm Radius (pixels)
+    <input type="number" name="lArmRad">
+    <input type="number" name="rArmRad">
+    Right Arm Radius (pixels)<br>
+    Left Poi Radius (pixels)
+    <input type="number" name="lPoiRad">
+    <input type="number" name="rPoiRad">
+    Right Poi Radius (pixels)<br>
+    Left Arm Speed (deg/update)
+    <input type="number" name="lArmSpd">
+    <input type="number" name="rArmSpd">
+    Right Arm Speed (deg/update)<br>
+    Left Poi Speed (deg/update)
+    <input type="number" name="lPoiSpd">
+    <input type="number" name="rPoiSpd">
+    Right Poi Speed (deg/update)<br>
+    Left Arm Initial Angle (deg)
+    <input type="number" name="lArmTh">
+    <input type="number" name="rArmTh">
+    Right Arm Initial Angle (deg)<br>
+    Left Poi Initial Angle (deg)
+    <input type="number" name="lPoiTh">
+    <input type="number" name="rPoiTh">
+    Right Poi Initial Angle (deg)<br>
+    Left Tail length
+    <input type="number" name="lTailLen">
+    <input type="number" name="rTailLen">
+    Right Tail length<br>
+    Update interval (ms)  
+    <input type="number" name="updateInterval">
+    <input type="number" name="shoulderSpacing">
+    Shoulder spacing (pixels)<br>
+    <!--input type="number" name="cSize" value="2">
+    <input type="number" name="hSize" value="2">
+    <input type="number" name="pSize" value="2"-->
+    
+    <input type="button" name="lPauseButton" value="Pause Left" onClick="pauseLeft(this.form)">
+    <input type="button" name="applyButton" value="Apply" onClick="updateValues(this.form)">
+    <input type="button" name="exportButton" value="Export" onClick="exportAddr(this.form)">
+    <input type="button" name="resetButton" value="Restart" onClick="restart(this.form)">
+    <input type="button" name="rPauseButton" value="Pause Right" onClick="pauseRight(this.form)"><br>
+    </form>
+    Left Tail Color    
+    <select onchange="lColorChange(this.value)">
+      <option value="0">black</option>
+      <option value="1">red</option>
+      <option value="2">green</option>
+      <option value="3">yellow</option>
+      <option value="4">blue</option>
+      <option value="5">magenta</option>
+      <option value="6">teal</option>
+    </select>
+    <select onchange="rColorChange(this.value)">
+      <option value="0">black</option>
+      <option value="1">red</option>
+      <option value="2">green</option>
+      <option value="3">yellow</option>
+      <option value="4" selected="selected">blue</option>
+      <option value="5">magenta</option>
+      <option value="6">teal</option>
+    </select>
+    Right Tail Color
+    <br>
+
+    <div>
+        <canvas id="canvas" width="600" height="600">
+         This text is displayed if your browser 
+         does not support HTML5 Canvas.
+        </canvas>
+    </div>
+
+    <script type="text/javascript" src="double.js"></script>
+
+    <a href="http://flattr.com/thing/739382/Flower-simulator" target="_blank">
+    <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
+	<br>
+  </center>
+  </section>
+</body>
+</html>
