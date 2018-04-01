@@ -27,12 +27,12 @@ var rPause = 0;
 var lColor = 0;
 var rColor = 4;
 var lHandDir;
-var lPoiDir;
-var lMode;
+var lPoiDir;  // just an int
+var lPoiMode;
 var plane;
 var rHandDir;
-var rPoiDir;
-var rMode;
+var rPoiDir;  // just an int
+var rPoiMode;
 
 function circle(x,y,r) {
   ctx.beginPath();
@@ -172,13 +172,11 @@ function init() {
   document.flowerArgs.updateInterval.value = updateInterval.toString();
   document.flowerArgs.shoulderSpacing.value = shoulderSpacing.toString();
   // Initialize mode menus
-  lHandDir = document.flowerModes.lHandDir;
-  lPoiDir = document.flowerModes.lPoiDir;
-  lMode = document.flowerModes.lMode;
-  plane = document.flowerModes.plane;
-  rHandDir = document.flowerModes.rHandDir;
-  rPoiDir = document.flowerModes.rPoiDir;
-  rMode = document.flowerModes.rMode;
+  lHandDir = document.flowerArgs.lHandDir;
+  lPoiMode = document.flowerArgs.lPoiMode;
+  plane = document.flowerArgs.plane;
+  rHandDir = document.flowerArgs.rHandDir;
+  rPoiMode = document.flowerArgs.rPoiMode;
   syncModeMenus();
   return setInterval(draw, updateInterval);
 }
@@ -195,56 +193,57 @@ function syncModeMenus() {
 
   if (lArmSpd * lPoiSpd > 0)
   {
-    lPoiDir.value = "0";
+    lPoiDir = 0;
   }
   else
   {
-    lPoiDir.value = "1";
+    lPoiDir = 1;
   }
 
-  if (lPoiDir.value == "0")
+  // need to handle zero arm speed
+  if (lPoiDir == 0)
   {
     // inspin
     switch(lPoiSpd / lArmSpd)
     {
       case 1:
         // extension
-	lMode.value = "0";
+	lPoiMode.value = "1";
         break;
 	
       case 2:
         // 1-petal
-	lMode.value = "1";
+	lPoiMode.value = "2";
         break;
 
       case 3:
         // 2-petal
-	lMode.value = "2";
+	lPoiMode.value = "3";
         break;
 
       case 4:
         // 3-petal
-	lMode.value = "3";
+	lPoiMode.value = "4";
         break;
 	
       case 5:
         // 4-petal
-	lMode.value = "4";
+	lPoiMode.value = "5";
         break;
 
       case 6:
         // 5-petal
-	lMode.value = "5";
+	lPoiMode.value = "6";
         break;
 	
       case 7:
         // 6-petal
-	lMode.value = "6";
+	lPoiMode.value = "7";
         break;
 	
       default:
         // Unknown
-	lMode.value = "-1";
+	lPoiMode.value = "-99";
         break;
     }
   }
@@ -253,34 +252,39 @@ function syncModeMenus() {
     // antispin
     switch(lPoiSpd / lArmSpd)
     {
+      case 0:
+        // Pendulum
+	lPoiMode.value = "0";
+        break;
+
       case -1:
-        // 1-petal
-	lMode.value = "1";
+        // Cat-eye
+	lPoiMode.value = "-1";
         break;
 
       case -2:
         // 3-petal
-	lMode.value = "3";
+	lPoiMode.value = "-2";
         break;
 	
       case -3:
         // 4-petal
-	lMode.value = "4";
+	lPoiMode.value = "-3";
         break;
 
       case -4:
         // 5-petal
-	lMode.value = "5";
+	lPoiMode.value = "-4";
         break;
 	
       case -5:
         // 6-petal
-	lMode.value = "6";
+	lPoiMode.value = "-5";
         break;
 	
       default:
         // Unknown
-	lMode.value = "-1";
+	lPoiMode.value = "-99";
         break;
      }
   }
@@ -296,56 +300,57 @@ function syncModeMenus() {
   
   if (rArmSpd * rPoiSpd > 0)
   {
-    rPoiDir.value = "0";
+    rPoiDir = 0;
   }
   else
   {
-    rPoiDir.value = "1";
+    rPoiDir = 1;
   }
 
-  if (rPoiDir.value == "0")
+  // need to handle zero arm speed
+  if (rPoiDir == 0)
   {
     // inspin
     switch(rPoiSpd / rArmSpd)
     {
       case 1:
         // extension
-	rMode.value = "0";
+	rPoiMode.value = "1";
         break;
 	
       case 2:
         // 1-petal
-	rMode.value = "1";
+	rPoiMode.value = "2";
         break;
 
       case 3:
         // 2-petal
-	rMode.value = "2";
+	rPoiMode.value = "3";
         break;
 
       case 4:
         // 3-petal
-	rMode.value = "3";
+	rPoiMode.value = "4";
         break;
 	
       case 5:
         // 4-petal
-	rMode.value = "4";
+	rPoiMode.value = "5";
         break;
 
       case 6:
         // 5-petal
-	rMode.value = "5";
+	rPoiMode.value = "6";
         break;
 	
       case 7:
         // 6-petal
-	rMode.value = "6";
+	rPoiMode.value = "7";
         break;
 	
       default:
         // Unknown
-	rMode.value = "-1";
+	rPoiMode.value = "-99";
         break;
     }
   }
@@ -354,34 +359,39 @@ function syncModeMenus() {
     // antispin
     switch(rPoiSpd / rArmSpd)
     {
+      case 0:
+        // Pendulum
+	rPoiMode.value = "0";
+        break;
+
       case -1:
-        // 1-petal
-	rMode.value = "1";
+        // Cat-eye
+	rPoiMode.value = "-1";
         break;
 
       case -2:
         // 3-petal
-	rMode.value = "3";
+	rPoiMode.value = "-2";
         break;
 	
       case -3:
         // 4-petal
-	rMode.value = "4";
+	rPoiMode.value = "-3";
         break;
 
       case -4:
         // 5-petal
-	rMode.value = "5";
+	rPoiMode.value = "-4";
         break;
 	
       case -5:
         // 6-petal
-	rMode.value = "6";
+	rPoiMode.value = "-5";
         break;
 	
       default:
         // Unknown
-	rMode.value = "-1";
+	rPoiMode.value = "-99";
         break;
      }
   }
@@ -395,6 +405,76 @@ function syncModeMenus() {
     plane.value = "0";
   }
   
+}
+
+function handDirChange(dir, hand) {
+  if (hand == 0)
+  {
+    // left hand
+    desiredArmSpd = parseFloat(document.flowerArgs.lArmSpd.value);
+    desiredPoiSpd = parseFloat(document.flowerArgs.lPoiSpd.value);
+    if (dir == "0" && desiredArmSpd > 0)
+    {
+      document.flowerArgs.lArmSpd.value = (desiredArmSpd * -1).toString();
+      document.flowerArgs.lPoiSpd.value = (desiredPoiSpd * -1).toString();
+    }
+  
+    if (dir == "1" && desiredArmSpd < 0)
+    {
+      document.flowerArgs.lArmSpd.value = (desiredArmSpd * -1).toString();
+      document.flowerArgs.lPoiSpd.value = (desiredPoiSpd * -1).toString();
+    }
+  }
+  else
+  {
+    // right hand
+    desiredArmSpd = parseFloat(document.flowerArgs.rArmSpd.value);
+    desiredPoiSpd = parseFloat(document.flowerArgs.rPoiSpd.value);
+    if (dir == "0" && desiredArmSpd > 0)
+    {
+      document.flowerArgs.rArmSpd.value = (desiredArmSpd * -1).toString();
+      document.flowerArgs.rPoiSpd.value = (desiredPoiSpd * -1).toString();
+    }
+  
+    if (dir == "1" && desiredArmSpd < 0)
+    {
+      document.flowerArgs.rArmSpd.value = (desiredArmSpd * -1).toString();
+      document.flowerArgs.rPoiSpd.value = (desiredPoiSpd * -1).toString();
+    }
+  }
+
+}
+
+function poiModeChange(mode, hand) {
+  desiredMode = parseInt(mode);
+  if (desiredMode != -99)
+  {
+    if (hand == 0)
+    {
+      // left hand
+      desiredArmSpd = parseFloat(document.flowerArgs.lArmSpd.value);
+      // set poi spd to multiple of arm spd
+      document.flowerArgs.lPoiSpd.value = (desiredArmSpd * desiredMode).toString();
+    }
+    else
+    {
+      // right hand
+      desiredArmSpd = parseFloat(document.flowerArgs.rArmSpd.value);
+      // set poi spd to multiple of arm spd
+      document.flowerArgs.rPoiSpd.value = (desiredArmSpd * desiredMode).toString();
+    }
+  }
+}
+
+function planeChange(pln) {
+  if (pln == 0)
+  {
+    document.flowerArgs.shoulderSpacing.value = "0";
+  }
+  else
+  {
+    document.flowerArgs.shoulderSpacing.value = "70";
+  }
 }
 
 function pauseLeft(form) {
@@ -442,13 +522,12 @@ function updateValues(form) {
   rPoiSpd = parseFloat(form.rPoiSpd.value);
   lTailLen = parseInt(form.lTailLen.value);
   rTailLen = parseInt(form.rTailLen.value);
+  // this only has an effect if set at init
   updateInterval = parseInt(form.updateInterval.value);
-  //shoulderSpacing = form.shoulderSpacing.value;
-  syncModeMenus();
 }
 
 function restart(form) {
-  //updateValues(form);
+  updateValues(form);
   shoulderSpacing = parseInt(form.shoulderSpacing.value);
   lArmTh = parseFloat(form.lArmTh.value);
   lPoiTh = parseFloat(form.lPoiTh.value);
@@ -456,6 +535,7 @@ function restart(form) {
   rArmTh = parseFloat(form.rArmTh.value);
   rPoiTh = parseFloat(form.rPoiTh.value);
   rTailArray = new Array();
+  syncModeMenus();
 }
 
 function exportAddr(form) {

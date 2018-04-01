@@ -11,70 +11,110 @@
   <center>
   <section>
     <form name="flowerArgs" action="" method="GET">
-    Left Arm Radius (pixels)
-    <input type="number" name="lArmRad">
-    <input type="number" name="rArmRad">
-    Right Arm Radius (pixels)<br>
-    Left Poi Radius (pixels)
-    <input type="number" name="lPoiRad">
-    <input type="number" name="rPoiRad">
-    Right Poi Radius (pixels)<br>
-    Left Arm Speed (deg/update)
-    <input type="number" name="lArmSpd">
-    <input type="number" name="rArmSpd">
-    Right Arm Speed (deg/update)<br>
-    Left Poi Speed (deg/update)
-    <input type="number" name="lPoiSpd">
-    <input type="number" name="rPoiSpd">
-    Right Poi Speed (deg/update)<br>
-    Left Arm Initial Angle (deg)
-    <input type="number" name="lArmTh">
-    <input type="number" name="rArmTh">
-    Right Arm Initial Angle (deg)<br>
-    Left Poi Initial Angle (deg)
-    <input type="number" name="lPoiTh">
-    <input type="number" name="rPoiTh">
-    Right Poi Initial Angle (deg)<br>
-    Left Tail length
-    <input type="number" name="lTailLen">
-    <input type="number" name="rTailLen">
-    Right Tail length<br>
-    Update interval (ms)  
-    <input type="number" name="updateInterval">
-    <input type="number" name="shoulderSpacing">
-    Shoulder spacing (pixels)<br>
-    <!--input type="number" name="cSize" value="2">
-    <input type="number" name="hSize" value="2">
-    <input type="number" name="pSize" value="2"-->
-    
-    <input type="button" name="lPauseButton" value="Pause Left" onClick="pauseLeft(this.form)">
-    <input type="button" name="applyButton" value="Apply" onClick="updateValues(this.form)">
-    <input type="button" name="exportButton" value="Export" onClick="exportAddr(this.form)">
-    <input type="button" name="resetButton" value="Restart" onClick="restart(this.form)">
-    <input type="button" name="rPauseButton" value="Pause Right" onClick="pauseRight(this.form)"><br>
+      Left Arm Radius (pixels)
+      <input type="number" name="lArmRad">
+      <input type="number" name="rArmRad">
+      Right Arm Radius (pixels)<br>
+      Left Poi Radius (pixels)
+      <input type="number" name="lPoiRad">
+      <input type="number" name="rPoiRad">
+      Right Poi Radius (pixels)<br>
+      Left Arm Speed (deg/update)
+      <input type="number" name="lArmSpd">
+      <input type="number" name="rArmSpd">
+      Right Arm Speed (deg/update)<br>
+      Left Poi Speed (deg/update)
+      <input type="number" name="lPoiSpd">
+      <input type="number" name="rPoiSpd">
+      Right Poi Speed (deg/update)<br>
+      Left Arm Initial Angle (deg)
+      <input type="number" name="lArmTh">
+      <input type="number" name="rArmTh">
+      Right Arm Initial Angle (deg)<br>
+      Left Poi Initial Angle (deg)
+      <input type="number" name="lPoiTh">
+      <input type="number" name="rPoiTh">
+      Right Poi Initial Angle (deg)<br>
+      Left Tail length
+      <input type="number" name="lTailLen">
+      <input type="number" name="rTailLen">
+      Right Tail length<br>
+      Update interval (ms)  
+      <input type="number" name="updateInterval">
+      <input type="number" name="shoulderSpacing">
+      Shoulder spacing (pixels)<br>
+      Left Mode
+      <select name="lHandDir" onchange="handDirChange(this.value, 0)">
+        <option value="0">CW</option>
+        <option value="1">CCW</option>
+      </select>
+      <select name="lPoiMode" onchange="poiModeChange(this.value, 0)">
+        <option value="-5">6-petal, anti-spin</option>
+        <option value="-4">5-petal, anti-spin</option>
+        <option value="-3">4-petal, anti-spin</option>
+        <option value="-2">3-petal, anti-spin</option>
+        <option value="-1">Cat-eye</option>
+        <option value="0">Pendulum</option>
+        <option value="1">Extension</option>
+        <option value="2">1-petal, in-spin</option>
+        <option value="3">2-petal, in-spin</option>
+        <option value="4">3-petal, in-spin</option>
+        <option value="5">4-petal, in-spin</option>
+        <option value="6">5-petal, in-spin</option>
+        <option value="7">6-petal, in-spin</option>
+        <option value="-99">None of the above</option>
+      </select>
+      <select name="plane" onchange="planeChange(this.value)">
+        <option value="0">Wheel plane</option>
+        <option value="1">Wall plane</option>
+      </select>
+      <select name="rHandDir" onchange="handDirChange(this.value, 1)">
+        <option value="0">CW</option>
+        <option value="1">CCW</option>
+      </select>
+      <select name="rPoiMode" onchange="poiModeChange(this.value, 1)">
+        <option value="-5">6-petal anti-spin</option>
+        <option value="-4">5-petal anti-spin</option>
+        <option value="-3">4-petal anti-spin</option>
+        <option value="-2">3-petal anti-spin</option>
+        <option value="-1">Cat-eye</option>
+        <option value="0">Pendulum</option>
+        <option value="1">Extension</option>
+        <option value="2">1-petal in-spin</option>
+        <option value="3">2-petal in-spin</option>
+        <option value="4">3-petal in-spin</option>
+        <option value="5">4-petal in-spin</option>
+        <option value="6">5-petal in-spin</option>
+        <option value="7">6-petal in-spin</option>
+        <option value="-99">None of the above</option>
+      </select>
+      Right Mode<br>
+      <input type="button" name="lPauseButton" value="Pause Left" onClick="pauseLeft(this.form)">
+      <input type="button" name="exportButton" value="Export" onClick="exportAddr(this.form)">
+      <input type="button" name="resetButton" value="Apply" onClick="restart(this.form)">
+      <input type="button" name="rPauseButton" value="Pause Right" onClick="pauseRight(this.form)"><br>
+      Left Tail Color	 
+      <select onchange="lColorChange(this.value)">
+        <option value="0">black</option>
+        <option value="1">red</option>
+        <option value="2">green</option>
+        <option value="3">yellow</option>
+        <option value="4">blue</option>
+        <option value="5">magenta</option>
+        <option value="6">teal</option>
+      </select>
+      <select onchange="rColorChange(this.value)">
+        <option value="0">black</option>
+        <option value="1">red</option>
+        <option value="2">green</option>
+        <option value="3">yellow</option>
+        <option value="4" selected="selected">blue</option>
+        <option value="5">magenta</option>
+        <option value="6">teal</option>
+      </select>
+      Right Tail Color<br>
     </form>
-    Left Tail Color    
-    <select onchange="lColorChange(this.value)">
-      <option value="0">black</option>
-      <option value="1">red</option>
-      <option value="2">green</option>
-      <option value="3">yellow</option>
-      <option value="4">blue</option>
-      <option value="5">magenta</option>
-      <option value="6">teal</option>
-    </select>
-    <select onchange="rColorChange(this.value)">
-      <option value="0">black</option>
-      <option value="1">red</option>
-      <option value="2">green</option>
-      <option value="3">yellow</option>
-      <option value="4" selected="selected">blue</option>
-      <option value="5">magenta</option>
-      <option value="6">teal</option>
-    </select>
-    Right Tail Color
-    <br>
-
+    
     <div>
         <canvas id="canvas" width="600" height="600">
          This text is displayed if your browser 
@@ -82,66 +122,12 @@
         </canvas>
     </div>
 
-    <!--script type="text/javascript" src="double.js"></script-->
-
-    <form name="flowerModes" action="" method="GET">
-    Left
-    <select name="lHandDir" onchange="lHandDir(this.value)">
-      <option value="0">CW</option>
-      <option value="1">CCW</option>
-    </select>
-    <select name="lPoiDir" onchange="lPoiDir(this.value)">
-      <option value="0">In-spin</option>
-      <option value="1">Anti-spin</option>
-    </select>
-    <select name="lMode" onchange="lMode(this.value)">
-      <option value="-1">Non-integer</option>
-      <option value="0">Extension</option>
-      <option value="1">1 petal</option>
-      <option value="2">2 petal</option>
-      <option value="3">3 petal</option>
-      <option value="4">4 petal</option>
-      <option value="5">5 petal</option>
-      <option value="6">6 petal</option>
-    </select>
-    <select name="plane" onchange="plane(this.value)">
-      <option value="0">Wheel</option>
-      <option value="1">Wall</option>
-    </select>
-    <select name="rHandDir" onchange="rHandDir(this.value)">
-      <option value="0">CW</option>
-      <option value="1">CCW</option>
-    </select>
-    <select name="rPoiDir" onchange="rPoiDir(this.value)">
-      <option value="0">In-spin</option>
-      <option value="1">Anti-spin</option>
-    </select>
-    <select name="rMode" onchange="rMode(this.value)">
-      <option value="-1">Non-integer</option>
-      <option value="0">Extension</option>
-      <option value="1">1 petal</option>
-      <option value="2">2 petal</option>
-      <option value="3">3 petal</option>
-      <option value="4">4 petal</option>
-      <option value="5">5 petal</option>
-      <option value="6">6 petal</option>
-    </select>
-    Right
-    </form>
-    
-    <!--div>
-        <canvas id="canvas" width="600" height="600">
-         This text is displayed if your browser 
-         does not support HTML5 Canvas.
-        </canvas>
-    </div-->
-
     <script type="text/javascript" src="double.js"></script>
 
-    <br><br>
     <a href="http://flattr.com/thing/739382/Flower-simulator" target="_blank">
     <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
     <br>
+    last updated: 2012-07-26
   </center>
   </section>
 </body>
